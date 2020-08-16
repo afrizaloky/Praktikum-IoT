@@ -4,14 +4,19 @@
 
 #define WIFI_AP "F"
 #define WIFI_PASSWORD "1234567890"
+
 #define TOKEN "303hoMJLhyZfhSbwHZLc"
+
 #define GPIO0 D3
 #define GPIO2 D4
+
 #define GPIO0_PIN 1 //ThingsBoard pin
 #define GPIO2_PIN 2 //ThingsBoard pin
+
 char thingsboardServer[] = "demo.thingsboard.io";
 
 WiFiClient wifiClient;
+
 PubSubClient client(wifiClient);
 
 int status = WL_IDLE_STATUS;
