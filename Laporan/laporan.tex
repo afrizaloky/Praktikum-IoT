@@ -121,6 +121,10 @@
       Kode di atas digunakan untuk men-\emph{setup} pin, komunikasi serial, komunikasi MQTT, wifi yang akan digunakan. \\
       \item \lstinputlisting[firstline=36,lastline=44]{../1/1.ino}
       Kode di atas digunakan untuk menghubungkan kembali komunikasi mqtt jika terputus.
+      \item \lstinputlisting[firstline=47,lastline=90]{../1/1.ino}
+      Kode di atas digunakan untuk mendapatkan pesan dari sebuah topik pada komunikasi mqtt. 
+      Pesan tersebut diolah, kemudian didapatkan nilai \emph{boolean}.
+      Nilai \emph{boolean} tersebut digunakan untuk men-set gpio. \\
     \end{enumerate}
     
     \subsection{Percobaan 3}
@@ -165,7 +169,19 @@
     Dashboard yang digunakan merupakan sebuah \emph{chart widget}.
     \emph{Chart widget} tersebut bertipe \emph{time series}.
     \subsection{Tugas}
-
+    Percobaan ini bertujuan untuk mengambil data dari sensor DHT11 dan mengirimkannya ke Thingsboard. 
+    Pengiriman data menggunakan protokol komunikasi mqtt. 
+    Source Code
+    \begin{enumerate}
+      \item \lstinputlisting[firstline=37,lastline=39,language=Python]{../3/3_dht.py}
+      Kode di atas digunakan untuk mendapatkan data \emph{humidity} dan \emph{temperature} sensor DHT11.
+      Data tersebut kemudian dibulatkan.
+      \item \lstinputlisting[firstline=45,lastline=45,language=Python]{../3/3_dht.py}
+      Kode di atas digunakan untuk mengirim data ke Thingsboard.
+      Data yang dikirim berbentuk JSON. \\
+    \end{enumerate}
+  \section{Praktikum IV}
+  \subsection{Percobaan 1}
 
     \begin{enumerate}
        
