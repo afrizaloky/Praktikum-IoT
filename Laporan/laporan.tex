@@ -209,7 +209,31 @@
     \end{enumerate}
   \section{Praktikum IV}
   \subsection{Percobaan 1}
+  Pada percobaan ini, praktikan menginstall beberapa \emph{library} antara lain :
+  \begin{enumerate}
+    \item Seeed Studio
+    \item Thingsboard MQTT PubSubClient
+  \end{enumerate}
 
+  Source Code
+    \begin{enumerate}
+      \item \lstinputlisting[firstline=1,lastline=11,language=Python]{../4/4.py}
+      Kode di atas digunakan untuk menambahkan \emph{library} yang akan digunakan. \\
+      \item \lstinputlisting[firstline=14,lastline=21,language=Python]{../4/4.py}
+      Kode di atas digunakan untuk melakukan konfigurasi format penulisan dan akses thingsboard. \\
+      \item \lstinputlisting[firstline=26,lastline=47,language=Python]{../4/4.py}
+      Kode di atas digunakan untuk mendapatkan data dari masing-masing sensor. \\
+      \item \lstinputlisting[firstline=50,lastline=61,language=Python]{../4/4.py}
+      Kode di atas digunakan untuk menerima permintaan dari pengguna dan mengirim permintaan tersebut ke \emph{device}.
+      Pengguna dapat mengirim perintah untuk menjalankan servo pada sudut tertentu dan mengontrol led. \\
+    \end{enumerate}
+  \subsection{Percobaan 2}
+  Pada percobaan ini, praktikan membuat \emph{device} dan \emph{dashboard} pada Thingsboard.
+  \emph{Dashboard} yang digunakan sudah disediakan oleh Seeed Studio.
+  \subsection{Tugas}
+  Percobaan ini merupakan gabungan dari percobaan 1 dan 2.
+  Setelah \emph{dashboard} dibuat, pengguna dapat mengendalikan led dan servo melalui \emph{dashboard} tersebut.
+  
     \begin{enumerate}
        
       \item Praktikum Minggu I
