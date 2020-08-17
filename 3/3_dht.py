@@ -31,7 +31,7 @@ client.loop_start()
 
 
 
-if name == '  main  ':
+if __name__ == "__main__": 
     try:
         while True:
             humidity,temperature = dht.read_retry(dht.DHT22, 4)
