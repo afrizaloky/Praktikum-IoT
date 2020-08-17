@@ -70,7 +70,7 @@
         \includegraphics[width=8cm]{gambar/GPIO-Pinout-Diagram-2.png}
         \caption{Pinout Raspberry Pi 3B}
         \label{pinout}
-\end{figure}
+  \end{figure}
 
 
   \section{NodeMCU}
@@ -142,6 +142,30 @@
 
   \subsection{Percobaan 3}
   \subsection{Tugas}
+\section{Praktikum Minggu III}
+    \subsection{Percobaan 1}
+    Pada percobaan ini, praktikan mengirim data dari sensor jarak menggunakan mqtt ke platform thingsboard.
+    Data tersebut dikirim 1 detik sekali. \\
+    Source Code
+    \begin{enumerate}
+      \item \lstinputlisting[firstline=1,lastline=7,language=Python]{../3/3.py}
+      Kode di atas digunakan untuk menambahkan \emph{library} yang akan digunakan. \\
+      \item \lstinputlisting[firstline=10,lastline=15,language=Python]{../3/3.py}
+      Kode di atas digunakan untuk melakukan konfigurasi pada pin yang akan digunakan. \\
+      \item \lstinputlisting[firstline=17,lastline=26,language=Python]{../3/3.py}
+      Kode di atas digunakan untuk men-\emph{setup} komunikasi MQTT dan komunikasi terhadap platform thingsboard. \\
+      \item \lstinputlisting[firstline=33,lastline=51,language=Python]{../3/3.py}
+      Kode di atas digunakan untuk mendapatkan data dari sensor jarak.
+    \end{enumerate}
+    \subsection{Percobaan 2}
+    Pada percobaan ini, praktikan membuat \emph{device} HCSR04 pada Thingsboard.
+    \emph{Device} tersebut berguna untuk menerima data yang berasal dari HCSR04. 
+    Data yang terkirim dapat dilihat \emph{tab} \emph{LATEST TELEMETRY}.
+    Data tersebut akan digunakan dalam membuat dashboard. \\
+    Dashboard yang digunakan merupakan sebuah \emph{chart widget}.
+    \emph{Chart widget} tersebut bertipe \emph{time series}.
+    \subsection{Tugas}
+
 
     \begin{enumerate}
        

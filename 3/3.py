@@ -4,6 +4,7 @@ import json
 import RPi.GPIO as GPIO 
 import time
 import sys
+import os
 
 # GPIO Mode (BOARD / BCM)
 GPIO.setmode(GPIO.BCM)  # set GPIO Pins 
@@ -16,11 +17,6 @@ GPIO.setup(GPIO_ECHO, GPIO.IN)
 THINGSBOARD_HOST = 'demo.thingsboard.io' 
 ACCESS_TOKEN = 'WJUNtDkejLyn9nKhgDov'
 
-# Data capture and upload interval in seconds. Less interval will eventually.
-INTERVAL = 1
-
-sensor_data = {'distance': 0} 
-next_reading = time.time() 
 client = mqtt.Client()
 # Set access token
 client.username_pw_set(ACCESS_TOKEN)
@@ -29,6 +25,10 @@ client.username_pw_set(ACCESS_TOKEN)
 client.connect(THINGSBOARD_HOST, 1883, 60) 
 client.loop_start()
 
+# Data capture and upload interval in seconds. Less interval will eventually.
+INTERVAL = 1
+sensor_data = {'distance': 0} 
+next_reading = time.time() 
 
 def distance():
 
