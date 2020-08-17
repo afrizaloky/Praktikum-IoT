@@ -222,7 +222,8 @@
       \item \lstinputlisting[firstline=14,lastline=21,language=Python]{../4/4.py}
       Kode di atas digunakan untuk melakukan konfigurasi format penulisan dan akses thingsboard. \\
       \item \lstinputlisting[firstline=26,lastline=47,language=Python]{../4/4.py}
-      Kode di atas digunakan untuk mendapatkan data dari masing-masing sensor. \\
+      Kode di atas digunakan untuk mendapatkan data dari masing-masing sensor.
+      Dalam percobaan ini hanya perangkat led dan servo yang digunakan. \\
       \item \lstinputlisting[firstline=50,lastline=61,language=Python]{../4/4.py}
       Kode di atas digunakan untuk menerima permintaan dari pengguna dan mengirim permintaan tersebut ke \emph{device}.
       Pengguna dapat mengirim perintah untuk menjalankan servo pada sudut tertentu dan mengontrol led. \\
@@ -233,150 +234,16 @@
   \subsection{Tugas}
   Percobaan ini merupakan gabungan dari percobaan 1 dan 2.
   Setelah \emph{dashboard} dibuat, pengguna dapat mengendalikan led dan servo melalui \emph{dashboard} tersebut.
-  
-    \begin{enumerate}
-       
-      \item Praktikum Minggu I
-      
-      Pada praktikum ini, praktikan diminta untuk membuat dashboard yang berfungsi untuk mengontrol pin pada nodemcu.
-      $$add \hspace{0.5cm} \$t0, \$t1, \$t2  \hspace{1cm}\$t0 = \$t1 + \$t2$$
 
-      Source Code : 
+  \section{Praktikum V}
+  \subsection{Percobaan 1}
+  \subsection{Percobaan 2}
+  \subsection{Tugas}
 
-      \lstinputlisting{code/register.s}
-      \begin{figure}[H]
-          \centering
-              \includegraphics[width=8cm]{gambar/register.png}
-              \caption{Simulasi Pengalamatan Register}
-              \label{simulasi}
-      \end{figure}
-      
-      Dapat dilihat pada figure 1, nilai t1 adalah 10, nilai t2 adalah 5 dan nilai t0 adalah hasil penjumlahan t1 dan t2.
-      \item Pengalamatan Base
-      
-      Pengalamatan base merupakan pengalamatan yang menunjuk satu pointer sebagai base.
-      Dalam pengalamatan ini sebuah register ditunjuk sebagai basis alamat memori
-      Contoh dalam penggunaan pengalamatan base : 
-      $$lw \hspace{0.5cm} \$s1,4(\$s0)$$
-      perintah diatas digunakan untuk mengambil nilai word pada memori s0 dengan offset 4.
-
-      Source Code : 
-      \lstinputlisting{code/base.s}
-      \begin{figure}[H]
-          \centering
-              \includegraphics[width=8cm]{gambar/base.png}
-              \caption{Simulasi Pengalamatan Base}
-              \label{simulasiBase}
-      \end{figure}
-      
-      Pada source code, nilai register s1 adalah sebuah string "hello world"
-      Dapat dilihat pada figure 2, register s1 memiliki memory address 0x1001000.
-      Register s2 merupakan hasil pointing dari register s1 dengan offset 0. 
-      Sehingga register s2 akan memiliki nilai berdasarkan nilai dari memory address 0x1001000-0x1001003.
-      Value dari memory address tersebut ditulis dalam format little endian.
-      \begin{table}
-          \begin{tabular}{|c|c|c|c|c|c|c|c|}
-              \hline
-              $memory$ & 0x100100 & 0x100101 & 0x100102 & 0x100103 \\ \hline
-              $value (hex)$ & 6c & 6c & 65 & 68 \\ \hline
-              $value (ascii)$ & l & l & e & h \\ \hline
-          \end{tabular}
-          \caption{Memory address}
-      \end{table}
-      
-      \item Pengalamatan Immediete
-      
-      Pengalamatan immediete merupakan pengalamatan yang membutuhkan satu operand saja dan sebuah konstanta (immediete value).
-      Pengalamatan ini akan mengeksekusi dirinya sendiri
-      Contoh dalam penggunaan pengalamatan immediete :
-      $$addi \hspace{0.5cm} \$t0,\$t0,1$$
-      Dalam bahasa pemrograman C, kode tersebut dapat ditulis dengan $t0 = t0+1;$
-
-      Source Code : 
-      \lstinputlisting{code/immediete.s}
-      
-      \begin{figure}[H]
-          \begin{subfigure}{.5\textwidth}
-            \centering
-            \includegraphics[width=.8\linewidth]{gambar/immediete1.png}
-            \caption{step 1}
-            \label{immediete1}
-          \end{subfigure}
-          \begin{subfigure}{.5\textwidth}
-            \centering
-            \includegraphics[width=.8\linewidth]{gambar/immediete2.png}
-            \caption{step 2}
-            \label{immediete2}
-          \end{subfigure}
-          \caption{Simulasi Pengalamatan Immediete}
-          \label{Immediete}
-          \end{figure}
-
-      Pada gambar Figure 3.a nilai dari register t1 adalah 10.
-      Dengan menggunakan single step pada QtSpim, setelah opcode dieksekusi maka nilai register t1 menjadi 13.
-      Hal tersebut dapat dilihat pada gambar Figure 3.b
-      \item Pengalamatan PC-relative
-      
-      % Pengalamatan PC-relative sering disebut juga dengan \emph{Program Counter Addressing}. 
-      Data dari pengalamatan ini spesifik pada offset tertentu.
-      Pengalamatan ini sering digunakan pada fungsi kondisional.
-      Offset value dapat berupa \emph{immediete value} atau sebuah label value.
-
-      Source Code : 
-
-      \lstinputlisting{code/length_pc.s}
-
-      Pada source code tersebut, register t1 merupakan Program Counter.
-
-
-      \item Pengalamatan Pseudodirect
-      
-      Pengalamatan pseudodirect biasanya tertanam langsung pada instruksinya. 
-      Pseudodirect memiliki instruksi format 6bit untuk opcode dan 26bit untuk target.
-      Pseudodirect menggunakan tipe jump instruksi. 
-
-      
-      Source Code : 
-      \lstinputlisting{code/pseudodirect.s}
-
-      \begin{figure}[H]
-          \begin{subfigure}{.5\textwidth}
-            \centering
-            \includegraphics[width=.8\linewidth]{gambar/pseudodirect1.png}
-            \caption{step 1}
-            \label{pseudodirect1}
-          \end{subfigure}
-          \begin{subfigure}{.5\textwidth}
-            \centering
-            \includegraphics[width=.8\linewidth]{gambar/pseudodirect2.png}
-            \caption{step 2}
-            \label{pseudodirect2}
-          \end{subfigure}
-          \begin{subfigure}{0.5\textwidth}
-              \centering
-              \includegraphics[width=.8\linewidth]{gambar/pseudodirect2.png}
-              \caption{step 3}
-              \label{pseudodirect2}
-            \end{subfigure}
-          \caption{Simulasi Pengalamatan pseudodirect}
-          \label{Immediete}
-          \end{figure}
-      
-      Pada Gambar 4.a merupakan proses inisiasi nilai register t0,t1,t2 dan t3.
-      Pada Gambar 4.b merupakan proses iterasi pertama.
-      Pada Gambar 4.c merupakan proses setelah iterasi selesai
-
-      \begin{table}[H]
-          \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-              \hline
-              iterasi ke- & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\ \hline
-              $t0$ & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3 & 3 &3 \\ \hline
-              $t1$ & 5 & 8 & 11 & 14 & 17 & 20 & 23 & 26 & 29 & 32 &35\\ \hline
-              $t2$ & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\ \hline
-              $t3$ & 2 & 1 & 0 & -1 & -2 & -3 & -4 & -5 & -6 & -7 & -8 \\ \hline
-          \end{tabular}
-          \caption{Proses Iterasi}
-      \end{table}
-
-\end{enumerate}
+  \section{Praktikum V}
+  \subsection{Percobaan 1}
+  \subsection{Percobaan 2}
+  \subsection{Percobaan 3}
+  \subsection{Tugas}
+    
 \end{document}
