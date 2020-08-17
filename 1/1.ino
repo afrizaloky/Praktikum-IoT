@@ -4,15 +4,11 @@
 
 #define WIFI_AP "F"
 #define WIFI_PASSWORD "1234567890"
-
 #define TOKEN "303hoMJLhyZfhSbwHZLc"
-
 #define GPIO0 D3
 #define GPIO2 D4
-
 #define GPIO0_PIN 1 //ThingsBoard pin
 #define GPIO2_PIN 2 //ThingsBoard pin
-
 char thingsboardServer[] = "demo.thingsboard.io";
 
 WiFiClient wifiClient;
@@ -23,7 +19,6 @@ int status = WL_IDLE_STATUS;
 
 // We assume that all GPIOs are LOW
 boolean gpioState[] = {false, false};
-
 void setup()
 {
     Serial.begin(115200);
