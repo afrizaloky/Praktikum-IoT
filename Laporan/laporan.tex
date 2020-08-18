@@ -114,9 +114,9 @@
 
 \lstset{style=mystyle}
 \usepackage{rotating}
-
-
-
+\usepackage{xcolor,colortbl}
+% Please add the following required packages to your document preamble:
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
 
 \begin{document}
 \cover
@@ -171,10 +171,29 @@
       Pada menu ini, pengguna dapat membuat tampilan \emph{dashboard} yang diinginkan
       \item AUDIT LOGS
     \end{enumerate}
-  \section{MQTT}
-  \section{HTTP}
+  \section{Protokol Komunikasi}
+  \subsection{MQTT}
+  \subsection{HTTP}
+  \subsection{Perbedaan MQTT dan HTTP}
 
-  \chapter{Pembahasan}
+\begin{table}[]
+  \begin{tabular}{|l|l|l|}
+  \hline
+  \rowcolor[HTML]{9B9B9B} 
+  \multicolumn{1}{|c|}{\cellcolor[HTML]{9B9B9B}Kriteria} & \multicolumn{1}{c|}{\cellcolor[HTML]{9B9B9B}MQTT}                                                      & \multicolumn{1}{c|}{\cellcolor[HTML]{9B9B9B}HTTP}                                                      \\ \hline
+  Arsitektur                                             & Client/Broker                                                                                          & Client/Server                                                                                          \\ \hline
+  Abstraksi                                              & Publish/Subscribe                                                                                      & Request/Response                                                                                       \\ \hline
+  Ukuran Header                                          & 2 Byte                                                                                                 & Tidak terdefinisi                                                                                      \\ \hline
+  Ukuran Pesan                                           & maksimum 256MB                                                                                         & \begin{tabular}[c]{@{}l@{}}Bisa sangat besar, \\ bergantung pada teknologi yang digunakan\end{tabular} \\ \hline
+  Metode                                                 & \begin{tabular}[c]{@{}l@{}}Connect, Disconnect, Publish, \\ Subscribe, Unsubscribe, Close\end{tabular} & \begin{tabular}[c]{@{}l@{}}Get, Post, Head, Put, Patch, \\ Options, Connect, Delete\end{tabular}       \\ \hline
+  Quality of Service                                     & \begin{tabular}[c]{@{}l@{}}QoS 0\\ QoS 1\\ QoS 2\end{tabular}                                          & Terbatas                                                                                               \\ \hline
+  Transport Protocol                                     & TCP (MQTT-SN)                                                                                          & TCP                                                                                                    \\ \hline
+  Keamanan                                               & TLS/SSL                                                                                                & TLS/SSL                                                                                                \\ \hline
+  Port                                                   & 1883/8883                                                                                              & 80/443                                                                                                 \\ \hline
+  \end{tabular}
+  \end{table} 
+
+    \chapter{Pembahasan}
   \section{Praktikum Minggu I}
     \subsection{Percobaan 1}
     Pada percobaan ini, praktikan membuat \emph{device} led pada Thingsboard.
@@ -276,7 +295,7 @@
       Dalam percobaan ini hanya perangkat led dan servo yang digunakan. \\
       \item \lstinputlisting[firstline=50,lastline=61,language=Python]{../4/4.py}
       Kode di atas digunakan untuk menerima permintaan dari pengguna dan mengirim permintaan tersebut ke \emph{device}.
-      Pengguna dapat mengirim perintah untuk menjalankan servo pada sudut tertentu dan mengontrol led. \\
+      Pengguna dapat mengirim perintah untuk menjalankan servo dengan sudut tertentu dan mengontrol led. \\
     \end{enumerate}
   \subsection{Percobaan 2}
   Pada percobaan ini, praktikan membuat \emph{device} dan \emph{dashboard} pada Thingsboard.
