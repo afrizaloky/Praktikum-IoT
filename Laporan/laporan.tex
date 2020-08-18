@@ -173,10 +173,21 @@
     \end{enumerate}
   \section{Protokol Komunikasi}
   \subsection{MQTT}
+  MQTT atau \emph{Message Queuing Telemetry Transport} merupakan salah satu protokol komunikasi yang cukup terkenal.
+  MQTT biasanya digunakan dalam komunikasi yang memiliki \emph{bandwidth} terbatas. 
+  Hal tersebut karena MQTT didesain untuk komunikasi data kecil.
+  Pada MQTT terdapat dua istilah yang sering digunakan
+  \begin{enumerate}
+    \item Client/Broker \\
+    Client merupakan device yang terkonek pada broker
+    \item Publish/Subscribe \\
+    Publish merupakan salah satu metode pada MQTT yang berguna untuk mengirim data ke broker.
+    Subscribe merupakan salah satu metode pada MQTT yang berguna untuk menerima data dari broker. \\
+  \end{enumerate}
   \subsection{HTTP}
   \subsection{Perbedaan MQTT dan HTTP}
 
-\begin{table}[]
+\begin{table}[H]
   \begin{tabular}{|l|l|l|}
   \hline
   \rowcolor[HTML]{9B9B9B} 
