@@ -41,11 +41,23 @@
 \usepackage{subcaption}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{typearea}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{color}
+\usepackage{mwe}
+\usepackage{listings}    
+\usepackage{etoolbox}  
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.47,0.47,0.33}
+\definecolor{myorange}{rgb}{0.8,0.4,0}
+\definecolor{mywhite}{rgb}{0.98,0.98,0.98}
+\definecolor{myblue}{rgb}{0.01,0.61,0.98}
 
 \lstdefinestyle{mystyle}{
     backgroundcolor=\color{backcolour},   
@@ -65,9 +77,47 @@
     showtabs=false,                  
     tabsize=2
 }
+\newcommand*{\FormatDigit}[1]{\ttfamily\textcolor{mygreen}{#1}}
+%% https://tex.stackexchange.com/questions/32174/listings-package-how-can-i-format-all-numbers
+\lstdefinestyle{FormattedNumber}{%
+    literate=*{0}{{\FormatDigit{0}}}{1}%
+             {1}{{\FormatDigit{1}}}{1}%
+             {2}{{\FormatDigit{2}}}{1}%
+             {3}{{\FormatDigit{3}}}{1}%
+             {4}{{\FormatDigit{4}}}{1}%
+             {5}{{\FormatDigit{5}}}{1}%
+             {6}{{\FormatDigit{6}}}{1}%
+             {7}{{\FormatDigit{7}}}{1}%
+             {8}{{\FormatDigit{8}}}{1}%
+             {9}{{\FormatDigit{9}}}{1}%
+             {.0}{{\FormatDigit{.0}}}{2}% Following is to ensure that only periods
+             {.1}{{\FormatDigit{.1}}}{2}% followed by a digit are changed.
+             {.2}{{\FormatDigit{.2}}}{2}%
+             {.3}{{\FormatDigit{.3}}}{2}%
+             {.4}{{\FormatDigit{.4}}}{2}%
+             {.5}{{\FormatDigit{.5}}}{2}%
+             {.6}{{\FormatDigit{.6}}}{2}%
+             {.7}{{\FormatDigit{.7}}}{2}%
+             {.8}{{\FormatDigit{.8}}}{2}%
+             {.9}{{\FormatDigit{.9}}}{2}%
+             %{,}{{\FormatDigit{,}}{1}% depends if you want the "," in color
+             {\ }{{ }}{1}% handle the space
+             ,%
+}
+\lstdefinestyle{Arduino}{%
+    style=FormattedNumber,
+    keywords={void},%                 define keywords
+    morecomment=[l]{//},%             treat // as comments
+    morecomment=[s]{/*}{*/},%         define /* ... */ comments
+    emph={HIGH, OUTPUT, LOW},%        keywords to emphasize
+}
 
 \lstset{style=mystyle}
 \usepackage{rotating}
+
+
+
+
 \begin{document}
 \cover
     \chapter{Pengenalan}
@@ -147,9 +197,9 @@
       \item \lstinputlisting[firstline=22,lastline=34]{../1/1.ino}
       Kode di atas digunakan untuk men-\emph{setup} pin, komunikasi serial, komunikasi MQTT, wifi yang akan digunakan. \\
       \item \lstinputlisting[firstline=36,lastline=44]{../1/1.ino}
-      Kode di atas digunakan untuk menghubungkan kembali komunikasi mqtt jika terputus.
+      Kode di atas digunakan untuk menghubungkan kembali komunikasi MQTT jika terputus.
       \item \lstinputlisting[firstline=47,lastline=90]{../1/1.ino}
-      Kode di atas digunakan untuk mendapatkan pesan dari sebuah topik pada komunikasi mqtt. 
+      Kode di atas digunakan untuk mendapatkan pesan dari sebuah topik pada komunikasi MQTT. 
       Pesan tersebut diolah, kemudian didapatkan nilai \emph{boolean}.
       Nilai \emph{boolean} tersebut digunakan untuk men-set gpio. \\
     \end{enumerate}
@@ -168,14 +218,14 @@
     Pada percobaan ini, praktikan membuat \emph{device} DHT11 pada Thingsboard.
     Setelah membuat \emph{device} maka akan mendapatkan akses token.
   \subsection{Percobaan 2}
-    Percobaan ini bertujuan untuk mengirim data dari sensor DHT11 ke thingsboard menggunakan mqtt.
+    Percobaan ini bertujuan untuk mengirim data dari sensor DHT11 ke thingsboard menggunakan MQTT.
     Data yang dikirim adalah nilai dari \emph{Humidity} dan \emph{Temperature}.
 
   \subsection{Percobaan 3}
   \subsection{Tugas}
 \section{Praktikum Minggu III}
     \subsection{Percobaan 1}
-    Pada percobaan ini, praktikan mengirim data dari sensor jarak menggunakan mqtt ke platform thingsboard.
+    Pada percobaan ini, praktikan mengirim data dari sensor jarak menggunakan MQTT ke platform thingsboard.
     Data tersebut dikirim 1 detik sekali. \\
     Source Code
     \begin{enumerate}
@@ -197,7 +247,7 @@
     \emph{Chart widget} tersebut bertipe \emph{time series}.
     \subsection{Tugas}
     Percobaan ini bertujuan untuk mengambil data dari sensor DHT11 dan mengirimkannya ke Thingsboard. 
-    Pengiriman data menggunakan protokol komunikasi mqtt. 
+    Pengiriman data menggunakan protokol komunikasi MQTT. 
     Source Code
     \begin{enumerate}
       \item \lstinputlisting[firstline=37,lastline=39,language=Python]{../3/3_dht.py}
@@ -237,13 +287,96 @@
 
   \section{Praktikum V}
   \subsection{Percobaan 1}
+  Pada percobaan ini, pengiriman data sensor DHT11 menggunakan komunikasi HTTP.
+  Data yang akan dikirim merupakan data \emph{dummy} yang dibuat menggunakan fungsi random.
+  Data yang berhasil terkirim dapat dilihat pada \emph{attributes} \emph{device}.
+  Source Code
+    \begin{enumerate}
+      \item \lstinputlisting[firstline=1,lastline=8,language=Python]{../5/5.py}
+      Kode di atas digunakan untuk menambahkan \emph{library} yang akan digunakan. \\
+      \item \lstinputlisting[firstline=12,lastline=14,language=Python]{../5/5.py}
+      Kode di atas digunakan untuk melakukan konfigurasi token dan \emph{endpoint}\\
+      \item \lstinputlisting[firstline=17,lastline=28,language=Python]{../5/5.py}
+      Kode di atas digunakan untuk mengirim data ke Thingsboard. 
+      Data tersebut berisi tentang nilai dari \emph{humdity} dan \emph{temperature}.
+      Data dikirim dalam bentuk JSON dengan menggunakan protokol http.
+      Jika data berhasil terkirim akan mendapatkan kode 200 atau 201. \\
+    \end{enumerate}
   \subsection{Percobaan 2}
+  \emph{Dasboard} berisi \emph{cards} yang berisi data \emph{humidity} dan \emph{temperature}. 
   \subsection{Tugas}
+  Pada percobaan ini hanya perlu mengubah data yang dikirim dengan data asli dari sensor DHT11.
+  Untuk mendapatkan data dari sensor perlu ditambahkan potongan kode ini
+  
+  \begin{enumerate}
+    \item \lstinputlisting[firstline=36,lastline=38,language=Python]{../5/tugas.py}
+  \end{enumerate}
 
-  \section{Praktikum V}
+  \section{Praktikum VI}
+  Praktikum kali ini tidak lagi menggunakan platform Thingsboard.
+  Praktikan membuat \emph{server}nya sendiri. 
+  Ada 3 komponen penting dalam praktikum ini, antara lain :
+  \begin{enumerate}
+    \item Server
+    Raspberry digunakan sebagai server dan broker MQTT.
+    Server dibuat menggunakan flask.
+    Flask dipilih karena flask merupakan \emph{framework} pembuat web yang ringan.
+    \item Client
+    Client di sini merujuk pada NodeMCU.
+    NodeMCU akan menerima data dari server melalui MQTT.
+    Data tersebut digunakan untuk mengendalikan led.
+    \item komunikasi
+    Komunikasi yang digunakan untuk menghubungkan server dan client adalah MQTT.
+  \end{enumerate}
   \subsection{Percobaan 1}
+  Pada percobaan ini, praktikan membuat broker.
+  Cukup dengan menginstall \emph{package} mosquitto untuk membuat broker.
+  Setelah mosquitto terinstall, \emph{enable service} mosquitto untuk menjalankan broker.
+  Broker akan berjalan pada port 1883. \\
   \subsection{Percobaan 2}
+  Pada percobaan ini, praktikan membuat server dengan flask.
+  Berikut \emph{library} yang digunakan :
+  \begin{enumerate}
+    \item flask
+    \item paho-mqtt
+  \end{enumerate}
+  Source Code
+    \begin{enumerate}
+      \item \lstinputlisting[firstline=6,lastline=7,language=Python]{../6/app.py}
+      Kode di atas digunakan untuk menambahkan \emph{library} yang akan digunakan. \\
+      \item \lstinputlisting[firstline=9,lastline=12,language=Python]{../6/app.py}
+      Kode di atas digunakan untuk inisiasi applikasi flask dan MQTT. \\
+      \item \lstinputlisting[firstline=25,lastline=28,language=Python]{../6/app.py}
+      Ketika pengguna melakukan \emph{request} ke \emph{website} maka server akan mengembalikan "main.html". \\
+      \item \lstinputlisting[firstline=33,lastline=52,language=Python]{../6/app.py}
+      Ketika ada \emph{trigger event} dari pengguna, server akan mengirim data 0 atau 1 pada topik yang ditentukan.
+      Tampilan pada \emph{website} juga akan berubah. \\
+    \end{enumerate}
   \subsection{Percobaan 3}
+  \begin{enumerate}
+      \item \lstinputlisting[firstline=9,lastline=10,style=Arduino]{../6/6.ino}
+      Kode di atas digunakan untuk menambahkan \emph{library} yang akan digunakan. \\
+      \item \lstinputlisting[firstline=13,lastline=15,style=Arduino]{../6/6.ino}
+      Kode di atas digunakan untuk konfigurasi wifi dan MQTT yang digunakan. \\
+      \item \lstinputlisting[firstline=18,lastline=19,style=Arduino]{../6/6.ino}
+      Kode di atas digunakan untuk inisiasi \emph{class} wifi dan MQTT.
+      \item \lstinputlisting[firstline=26,lastline=40,style=Arduino]{../6/6.ino}
+      Kode di atas digunakan untuk terhubung dengan wifi. \\
+      \item \lstinputlisting[firstline=45,lastline=83,style=Arduino]{../6/6.ino}
+      Ketika ada pesan dari MQTT maka pesan tersebut akan di \emph{parsing} menjadi data.
+      Data tersebut bertipe \emph{boolean}
+      Data tersebut digunakan untuk mengganti \emph{state} dari pin NodeMCU. \\
+      \item \lstinputlisting[firstline=87,lastline=119,style=Arduino]{../6/6.ino}
+      Ketika koneksi wifi ataupun mqtt terputus, maka akan dihubungkan kembali.
+  \end{enumerate}
   \subsection{Tugas}
+  \begin{enumerate}
+    \item Protokol komunikasi yang digunakan
+    \begin{enumerate}
+      \item MQTT
+      \item HTTP
+      \item CoAP
+    \end{enumerate}
+  \end{enumerate}
     
 \end{document}

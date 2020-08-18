@@ -5,8 +5,8 @@
 
 import paho.mqtt.client as mqtt
 from flask import Flask, render_template, request
-app = Flask(__name__)
 
+app = Flask(__name__)
 mqttc=mqtt.Client()
 mqttc.connect("test.mosquitto.org",1883,60)
 mqttc.loop_start()
